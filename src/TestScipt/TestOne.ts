@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { generateSprite } from '../utils/LocalUtils';
 
+const ANIMATION_TIME = 2;
 export default class TestOne extends PIXI.Container {
     private _sprites: PIXI.Sprite[] = [];
     private _testOneContainer: PIXI.Container;
@@ -73,7 +74,7 @@ export default class TestOne extends PIXI.Container {
             throw new Error('TestOne :: _runAnim : Should not run two animation together, please debug');
         }
 
-        this._runingAnim = this._moveXAnimation(300, 0.2, sprite, callback);
+        this._runingAnim = this._moveXAnimation(300, ANIMATION_TIME, sprite, callback);
     }
 
     private _onAnimationEnd() {
