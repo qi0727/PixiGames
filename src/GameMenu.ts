@@ -4,31 +4,40 @@ import { generateSpriteButton } from './utils/LocalUtils';
 export class GameMenu {
 
     private _app: PIXI.Application;
-    private _button1: PIXI.Sprite;
+    private _testOneBtn: PIXI.Sprite;
+    private _testTwoBtn: PIXI.Sprite;
+    private _testThreeBtn: PIXI.Sprite;
 
     public setUp(app: any) {
         this._app = app;
-        const button = generateSpriteButton('asset/button.png', this._onButtonTouch.bind(this), 'Test1');
-        button.x = 100;
-        button.y = 100;
-        app.stage.addChild(button);
+        const btn1 = this._testOneBtn = generateSpriteButton('asset/button.png', this._onTestOneTrigger.bind(this), 'Test1');
+        btn1.x = 100;
+        btn1.y = 100;
+        app.stage.addChild(btn1);
 
-        const button1 = generateSpriteButton('asset/button.png', this._onButtonTouch.bind(this), 'Test2');
-        button1.x = 100;
-        button1.y = 200;
-        app.stage.addChild(button);
+        const btn2 = this._testTwoBtn = generateSpriteButton('asset/button.png', this._onTestTwoTrigger.bind(this), 'Test2');
+        btn2.x = 100;
+        btn2.y = 200;
+        app.stage.addChild(btn2);
 
 
-        const button2 = generateSpriteButton('asset/button.png', this._onButtonTouch.bind(this), 'test3');
-        button2.x = 100;
-        button2.y = 300;
-        app.stage.addChild(button);
+        const btn3 = this._testThreeBtn = generateSpriteButton('asset/button.png', this._onTestThreeTrigger.bind(this), 'test3');
+        btn3.x = 100;
+        btn3.y = 300;
+        app.stage.addChild(btn3);
     }
 
 
-    private _onButtonTouch() {
-        console.log('Hello World');
+    private _onTestOneTrigger() {
+        console.log('test 1');
     }
+    private _onTestTwoTrigger() {
+        console.log('test 2');
+    }
+    private _onTestThreeTrigger() {
+        console.log('test 3');
+    }
+
 
 
     public run() {
