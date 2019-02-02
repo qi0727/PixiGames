@@ -13,18 +13,16 @@ export class GameMenu {
         button.y = 100;
         app.stage.addChild(button);
 
-        const button = generateSpriteButton('asset/button.png', this._onButtonTouch.bind(this), 'Test2');
-        button.x = 100;
-        button.y = 200;
+        const button1 = generateSpriteButton('asset/button.png', this._onButtonTouch.bind(this), 'Test2');
+        button1.x = 100;
+        button1.y = 200;
         app.stage.addChild(button);
 
 
-        const button = generateSpriteButton('asset/button.png', this._onButtonTouch.bind(this), 'test3');
-        button.x = 100;
-        button.y = 300;
+        const button2 = generateSpriteButton('asset/button.png', this._onButtonTouch.bind(this), 'test3');
+        button2.x = 100;
+        button2.y = 300;
         app.stage.addChild(button);
-
-        console.log('hello');
     }
 
 
