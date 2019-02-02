@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
-import { generateSpriteButton } from './utils/LocalUtils';
+import { generateSprite } from './utils/LocalUtils';
+import TestOne from './TestScipt/TestOne';
 
 export class GameMenu {
 
@@ -10,18 +11,18 @@ export class GameMenu {
 
     public setUp(app: any) {
         this._app = app;
-        const btn1 = this._testOneBtn = generateSpriteButton('asset/button.png', this._onTestOneTrigger.bind(this), 'Test1');
+        const btn1 = this._testOneBtn = generateSprite('asset/button.png', 'Test1', true, this._onTestOneTrigger.bind(this));
         btn1.x = 100;
         btn1.y = 100;
         app.stage.addChild(btn1);
 
-        const btn2 = this._testTwoBtn = generateSpriteButton('asset/button.png', this._onTestTwoTrigger.bind(this), 'Test2');
+        const btn2 = this._testTwoBtn = generateSprite('asset/button.png', 'Test2', true, this._onTestTwoTrigger.bind(this));
         btn2.x = 100;
         btn2.y = 200;
         app.stage.addChild(btn2);
 
 
-        const btn3 = this._testThreeBtn = generateSpriteButton('asset/button.png', this._onTestThreeTrigger.bind(this), 'test3');
+        const btn3 = this._testThreeBtn = generateSprite('asset/button.png', 'test3', true, this._onTestThreeTrigger.bind(this));
         btn3.x = 100;
         btn3.y = 300;
         app.stage.addChild(btn3);
@@ -29,7 +30,8 @@ export class GameMenu {
 
 
     private _onTestOneTrigger() {
-        console.log('test 1');
+        const testOne = new TestOne();
+        testOne.setUp(this._app);
     }
     private _onTestTwoTrigger() {
         console.log('test 2');
