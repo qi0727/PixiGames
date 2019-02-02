@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { generateSprite } from './utils/LocalUtils';
 import TestOne from './TestScipt/TestOne';
+import TestTwo from './TestScipt/TestTwo';
 
 export class GameMenu {
 
@@ -43,11 +44,17 @@ export class GameMenu {
             console.log('Game Menu :: _onTestOneTrigger : testone Animtion Complete!');
         });
     }
+
     private _onTestTwoTrigger() {
         this._checkDisposeItem();
+        const testTwo = new TestTwo();
 
-        console.log('test 2');
+        this._disposeAnimation = () => {
+            testTwo.stopAll();
+        }
+        testTwo.setUp(this._app);
     }
+
     private _onTestThreeTrigger() {
         this._checkDisposeItem();
 
