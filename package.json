@@ -1,0 +1,25 @@
+{
+  "name": "softgametest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist.bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browser-sync start --server"
+  },
+  "author": "WeiQiLam",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.26.3",
+    "pixi.js": "^4.8.5",
+    "typescript": "^3.3.1"
+  },
+  "devDependencies": {
+    "brfs": "^2.0.1",
+    "source-map-loader": "^0.2.4",
+    "transform-loader": "^0.2.4",
+    "ts-loader": "^5.3.3",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1"
+  }
+}
