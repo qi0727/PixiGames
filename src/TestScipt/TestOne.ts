@@ -7,10 +7,11 @@ export default class TestOne extends PIXI.Container {
     private _app: PIXI.Application;
     private _runingAnim: any;
     private _bindedUpdate: any;
+    private _completeCallback: any;
 
 
-
-    public setUp(app: PIXI.Application) {
+    public setUp(app: PIXI.Application, completeCallback: () => void) {
+        this._completeCallback = completeCallback();
         this._app = app;
         const container = this._testOneContainer = new PIXI.Container;
         const sprites = [];
@@ -30,16 +31,11 @@ export default class TestOne extends PIXI.Container {
 
         this._bindedUpdate = this._update.bind(this);
         this.startAnimation();
-
-
     }
 
     public startAnimation() {
-        // this._testOneContainer.setChildIndex(this._sprites[0], 143);
-
         const container = this._testOneContainer;
         const sprites = this._sprites;
-
 
         let animationCounter = this._sprites.length - 1;
         let indexCounter = 0;
@@ -51,25 +47,44 @@ export default class TestOne extends PIXI.Container {
             animationCounter -= 1;
             indexCounter++;
             if (animationCounter > -1) {
-                this._runingAnim = this._moveXAnimation(300, 2, sprites[animationCounter], animationConpleteCallback);
+                this._runAnim(sprites[animationCounter], animationConpleteCallback);
             } else {
                 this._onAnimationEnd();
             }
-
         }
-        this._runingAnim = this._moveXAnimation(300, 2, this._sprites[animationCounter], animationConpleteCallback);
+
+        this._runAnim(sprites[animationCounter], animationConpleteCallback);
         this._app.ticker.add(this._bindedUpdate);
     }
 
-    private _update(delta: number) {
-        this._runingAnim && this._runingAnim(delta);
+    public stopAll() {
+        this._runingAnim = undefined;
+        this.cleanUp();
+    }
+
+    public cleanUp() {
+        this._testOneContainer.removeChildren();
+        this._app.stage.removeChild(this._testOneContainer);
+        console.log('TestOne :: cleanUp : Clean Up Done!')
+    }
+
+    private _runAnim(sprite: PIXI.Sprite, callback: () => void) {
+        if (this._runingAnim) {
+            throw new Error('TestOne :: _runAnim : Should not run two animation together, please debug');
+        }
+
+        this._runingAnim = this._moveXAnimation(300, 0.2, sprite, callback);
     }
 
     private _onAnimationEnd() {
         const app = this._app;
         app.ticker.remove(this._bindedUpdate);
-        console.log('hello');
+        console.log('TestOne :: _onAnimationEnd : animation Complete');
+
+        const cb = this._completeCallback;
+        cb && cb();
     }
+
 
     // this is specific for this animation only.
     private _moveXAnimation(distance: number, time: number, sprite: PIXI.Sprite, callback: () => void) {
@@ -92,6 +107,10 @@ export default class TestOne extends PIXI.Container {
 
         }
 
+    }
+
+    private _update(delta: number) {
+        this._runingAnim && this._runingAnim(delta);
     }
 
 

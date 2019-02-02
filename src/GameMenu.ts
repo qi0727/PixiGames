@@ -9,6 +9,8 @@ export class GameMenu {
     private _testTwoBtn: PIXI.Sprite;
     private _testThreeBtn: PIXI.Sprite;
 
+    private _disposeAnimation: any;
+
     public setUp(app: any) {
         this._app = app;
         const btn1 = this._testOneBtn = generateSprite('asset/button.png', 'Test1', true, this._onTestOneTrigger.bind(this));
@@ -30,14 +32,33 @@ export class GameMenu {
 
 
     private _onTestOneTrigger() {
+        this._checkDisposeItem();
         const testOne = new TestOne();
-        testOne.setUp(this._app);
+
+        this._disposeAnimation = () => {
+            testOne.stopAll();
+        }
+
+        testOne.setUp(this._app, () => {
+            console.log('Game Menu :: _onTestOneTrigger : testone Animtion Complete!');
+        });
     }
     private _onTestTwoTrigger() {
+        this._checkDisposeItem();
+
         console.log('test 2');
     }
     private _onTestThreeTrigger() {
+        this._checkDisposeItem();
+
         console.log('test 3');
+    }
+
+    private _checkDisposeItem() {
+        const disposeAnimation = this._disposeAnimation;
+        this._disposeAnimation = undefined;
+
+        disposeAnimation && disposeAnimation();
     }
 
 
