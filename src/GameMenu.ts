@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import { generateSprite } from './utils/LocalUtils';
 import TestOne from './TestScipt/TestOne';
 import TestTwo from './TestScipt/TestTwo';
+import TestThree from './TestScipt/TestThree';
 
 export class GameMenu {
 
@@ -57,8 +58,13 @@ export class GameMenu {
 
     private _onTestThreeTrigger() {
         this._checkDisposeItem();
+        const testThree = new TestThree();
 
-        console.log('test 3');
+        this._disposeAnimation = () => {
+            testThree.stopAll();
+        }
+
+        testThree.setUp(this._app);
     }
 
     private _checkDisposeItem() {
@@ -67,7 +73,6 @@ export class GameMenu {
 
         disposeAnimation && disposeAnimation();
     }
-
 
 
     public run() {

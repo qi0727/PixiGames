@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import { generateSprite } from '../utils/LocalUtils';
 
 const ANIMATION_TIME = 2;
-export default class TestOne extends PIXI.Container {
+export default class TestOne {
     private _sprites: PIXI.Sprite[] = [];
     private _testOneContainer: PIXI.Container;
     private _app: PIXI.Application;

@@ -6,7 +6,6 @@ const PRICES = ['200.00', '1,000.00', '500.00', '700.00'];
 
 export default class TestTwo {
     private _app: PIXI.Application;
-    private _testTwoContianer: PIXI.Container;
     private _emojiSprite: PIXI.Sprite[] = [];
     private _currencySprite: PIXI.Sprite[] = [];
     private _bindedUpdate: (delta: number) => void;
@@ -20,7 +19,6 @@ export default class TestTwo {
 
     public setUp(app: PIXI.Application) {
         this._app = app;
-        const container = this._testTwoContianer = new PIXI.Container;
 
         this._bindedUpdate = this._update.bind(this);
 
@@ -83,9 +81,6 @@ export default class TestTwo {
         this._disband = undefined;
 
         disband && disband();
-
-        this._testTwoContianer.removeChildren();
-        this._app.stage.removeChild(this._testTwoContianer);
     }
 
     private _startAnimation() {

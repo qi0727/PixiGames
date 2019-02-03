@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "browser-sync": "^2.26.3",
+    "pixi-particles": "^3.1.0",
     "pixi.js": "^4.8.5",
     "typescript": "^3.3.1"
   },
